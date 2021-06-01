@@ -3,6 +3,16 @@ package Anel;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ *  * Especificações
+ *  *  1. a cada 30 segundos um novo processo deve ser criado;
+ *  *  2. a cada 25 segundos um processo deve fazer uma requisição para o coordenador;
+ *  *  3. a cada 100 segundos o coordenador fica inativo;
+ *  *  4. a cada 80 segundos um processo da lista de processos fica inativo;
+ *
+ *  *  5. dois processos não podem ter o mesmo ID;
+ *  *  6. dois processos de eleição não podem acontecer simultaneamente.
+ */
 public class Anel {
     private final int ADICIONA = 3000;
     private final int REQUISICAO = 2500;
@@ -10,7 +20,7 @@ public class Anel {
     private final int INATIVO_PROCESSO = 8000;
 
     public static ArrayList<Processo> processosAtivos;
-    private final Object lock = new Object(); // Bloqueio de acesso à lista de processos ativos
+    private final Object lock = new Object(); // Bloqueio de acesso à lista de processos ativos, somente um processo por vez. atende ao requisito 6
 
     public Anel() {
         processosAtivos = new ArrayList<Processo>();
